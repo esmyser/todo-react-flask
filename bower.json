@@ -1,0 +1,26 @@
+{
+  "name": "todo-react-flask",
+  "homepage": "https://github.com/esmyser/todo-react-flask",
+  "authors": [
+    "esmyser <esmyser@gmail.com>"
+  ],
+  "description": "",
+  "main": "app.py",
+  "keywords": [
+    "todo",
+    "react",
+    "flask"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "react": "^15.4.1"
+  }
+}
