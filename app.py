@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 import os
 import psycopg2
@@ -7,7 +7,10 @@ import urllib.parse
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+from models import Item
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
