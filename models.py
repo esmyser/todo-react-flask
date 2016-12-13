@@ -10,4 +10,4 @@ class Item(db.Model):
         self.order = order
 
     def __repr__(self):
-        return '<Item %r>' % self.description
+        return '<id {}>'.format(self.id)

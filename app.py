@@ -17,6 +17,8 @@ def index():
     # if request.method == 'POST':
     #   createItem(request.form)
     # else
+    # items = Item.query.all()
+    # print(items)
     return render_template('index.html')
 
 # @app.route('/<int:item_id>')
@@ -34,3 +36,7 @@ def index():
 # @app.route('/<int:item_id>/delete', methods=['DELETE'])
 # def delete_item():
 #     return "placeholder"
+
+if __name__ == '__main__':
+    app.run()
+    

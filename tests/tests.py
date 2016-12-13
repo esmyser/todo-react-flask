@@ -1,8 +1,8 @@
 from flask_testing import TestCase  
 from app import db, app
-import os
-
 from models import Item
+
+import os
 
 SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 
