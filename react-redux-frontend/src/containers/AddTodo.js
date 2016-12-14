@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 // import { Input, Button } from 'react-bootstrap';
 
 let AddTodo = () => {
@@ -7,10 +7,10 @@ let AddTodo = () => {
         <div>
             <form>
                 <input 
-                 type='text' 
-                 placeholder='What needs to be done?' />
+                  type='text' 
+                  placeholder='What needs to be done?' />
                 <button>
-                    Add Todo
+                  Add Todo
                 </button>
             </form>
         </div>
