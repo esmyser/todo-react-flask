@@ -1,22 +1,14 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import { Navbar, Jumbotron, Button } from 'react-bootstrap';
-import './App.css';
+import React from 'react';
+import AddTodo from './AddTodo';
+import TodoList from './TodoList';
+import Footer from './Footer';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+const App = () => (
+    <div>
+        <AddTodo />
+        <TodoList />
+        <Footer />
+    </div>
+)
 
 export default App;

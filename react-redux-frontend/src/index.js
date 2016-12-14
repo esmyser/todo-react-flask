@@ -6,7 +6,6 @@ import { createStore } from 'redux';
 import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import './index.css';
 
 let store = createStore(todoApp);
 
