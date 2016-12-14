@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, redirect, url_for, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 import os
@@ -14,12 +14,15 @@ from models import Item
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    # if request.method == 'POST':
-    #   createItem(request.form)
-    # else
-    # items = Item.query.all()
-    # print(items)
-    return render_template('index.html')
+    if request.method == 'POST':
+        item = Item(request.form['description'], request.form['order'])
+        db.session.add(item)
+        db.session.commit()
+        return redirect(url_for('index'))
+    else:
+        items = Item.query.all()
+        print(items)
+        return render_template('index.html', items=items)
 
 # @app.route('/<int:item_id>')
 # def show_item():
