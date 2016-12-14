@@ -2,6 +2,8 @@
 */.DS_Store
 flask-api/env
 flask-api/venv/
+flask-api/static/bower_components
 react-redux-frontend/npm-debug.log
+react-redux-frontend/node_modules
 react-redux-frontend/coverage
 react-redux-frontend/build
