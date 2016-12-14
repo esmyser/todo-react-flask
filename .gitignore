@@ -1,3 +1,7 @@
+*/.env
 */.DS_Store
 flask-api/env
-flask-api/venv
+flask-api/venv/
+react-redux-frontend/npm-debug.log
+react-redux-frontend/coverage
+react-redux-frontend/build
