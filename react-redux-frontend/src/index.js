@@ -7,7 +7,7 @@ import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
-// let store = createStore(App);
+// let store = createStore(todoApp);
 
 ReactDOM.render(
     // <Provider store={store}>
