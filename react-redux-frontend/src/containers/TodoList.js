@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Todo from './Todo';
+import Todo from '../components/Todo';
 
 const TodoList = ({ todos = [] }) => (
     <ul>
