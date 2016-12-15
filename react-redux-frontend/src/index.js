@@ -56,24 +56,28 @@ const TodoList = ({ todos, onTodoClick }) => (
     </ul>
 )
 
-// TodoApp Container
 let nextTodoId = 0;
+const AddTodo = ({ todos }) => (
+    <div>
+        <input ref={node => { todos.input = node; }} />
+        <button onClick={() => {
+            store.dispatch({
+                type: 'ADD_TODO',
+                text: todos.input.value,
+                id: nextTodoId++
+            });
+            todos.input.value = '';
+        }}>Add Todo</button>
+    </div>
+)
+
+// TodoApp Container
 class TodoApp extends Component { 
     render() { 
         const { todos } = this.props
         return (
             <div>
-                <input ref={node => {
-                    this.input = node;
-                }} />
-                <button onClick={() => {
-                    store.dispatch({
-                        type: 'ADD_TODO',
-                        text: this.input.value,
-                        id: nextTodoId++
-                    });
-                    this.input.value = '';
-                }}>Add Todo</button>
+                <AddTodo todos={todos} />
                 <TodoList 
                     todos={todos} 
                     onTodoClick={id => store.dispatch({
