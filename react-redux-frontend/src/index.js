@@ -24,11 +24,10 @@ const todo = (state, action) => {
     }
 };
 
-// Reducer for Todos
-const todos = (state=[], action) => {
+// Reducer for todoList
+const todoList = (state=[], action) => {
     switch (action.type) {
         case 'ADD_TODO':
-            console.log('in todos');
             return [...state, todo(undefined, action)];
         case 'TOGGLE_TODO':
             return state.map(t => todo(t, action));
@@ -38,8 +37,9 @@ const todos = (state=[], action) => {
 };
 
 // Store
-const store = createStore(todos);
+const store = createStore(todoList);
 
+// component for Todo
 const Todo = ({ onClick, completed, text }) => (
     <li 
         onClick={onClick}
@@ -48,28 +48,30 @@ const Todo = ({ onClick, completed, text }) => (
     </li>
 )
 
-const TodoList = ({ todos, onTodoClick }) => (
+// component for TodoList
+const TodoList = ({ todoList, onTodoClick }) => (
     <ul>
-    {todos.map(todo => 
+    {todoList.map(todo => 
         <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} />
     )}
     </ul>
 )
 
+// Container for AddTodo
 let nextTodoId = 0;
-const AddTodo = ({ todos }) => (
+const AddTodo = ({ todoList }) => (
     <div>
-        <input ref={node => { todos.input = node; }} />
+        <input ref={node => { todoList.input = node; }} />
         <button onClick={() => {
-            if (!todos.input.value.length){
+            if (!todoList.input.value.length){
                 return;
             }
             store.dispatch({
                 type: 'ADD_TODO',
-                text: todos.input.value,
+                text: todoList.input.value,
                 id: nextTodoId++
             });
-            todos.input.value = '';
+            todoList.input.value = '';
         }}>Add Todo</button>
     </div>
 )
@@ -77,12 +79,12 @@ const AddTodo = ({ todos }) => (
 // TodoApp Container
 class TodoApp extends Component { 
     render() { 
-        const { todos } = this.props
+        const { todoList } = this.props
         return (
             <div>
-                <AddTodo todos={todos} />
+                <AddTodo todoList={todoList} />
                 <TodoList 
-                    todos={todos} 
+                    todoList={todoList} 
                     onTodoClick={id => store.dispatch({
                         type: 'TOGGLE_TODO',
                         id: id
@@ -96,7 +98,7 @@ class TodoApp extends Component {
 const render = () => {
     ReactDOM.render(
         <div> 
-            <TodoApp todos={store.getState()} />
+            <TodoApp todoList={store.getState()} />
         </div>,
         document.getElementById('root')
     );
