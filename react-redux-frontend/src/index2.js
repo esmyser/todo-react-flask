@@ -1,3 +1,4 @@
+// To replace index.js once I get props sending down the tree
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
