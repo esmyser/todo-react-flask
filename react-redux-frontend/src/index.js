@@ -61,6 +61,9 @@ const AddTodo = ({ todos }) => (
     <div>
         <input ref={node => { todos.input = node; }} />
         <button onClick={() => {
+            if (!todos.input.value.length){
+                return;
+            }
             store.dispatch({
                 type: 'ADD_TODO',
                 text: todos.input.value,
