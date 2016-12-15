@@ -58,42 +58,47 @@ const TodoList = ({ todoList, onTodoClick }) => (
 )
 
 // Container for AddTodo
-let nextTodoId = 0;
-const AddTodo = ({ todoList }) => (
-    <div>
-        <input ref={node => { todoList.input = node; }} />
-        <button onClick={() => {
-            if (!todoList.input.value.length){
-                return;
-            }
-            store.dispatch({
-                type: 'ADD_TODO',
-                text: todoList.input.value,
-                id: nextTodoId++
-            });
-            todoList.input.value = '';
-        }}>Add Todo</button>
-    </div>
-)
+const AddTodo = ({ onAddClick }) => {
+    let input;
+    return (
+        <div>
+            <input ref={node => { input = node; }} />
+            <button onClick={() => {
+                if (!input.value.length){
+                    return;
+                }
+                onAddClick(input.value);
+                input.value = '';
+            }}>Add Todo</button>
+        </div>
+    )
+}
 
 // TodoApp Container
-class TodoApp extends Component { 
-    render() { 
-        const { todoList } = this.props
-        return (
-            <div>
-                <AddTodo todoList={todoList} />
-                <TodoList 
-                    todoList={todoList} 
-                    onTodoClick={id => store.dispatch({
-                        type: 'TOGGLE_TODO',
-                        id: id
-                    })}
-                />
-            </div>
-        );
-    }
-}
+let nextTodoId = 0;
+
+const TodoApp = ({ todoList }) => (
+    <div>
+        <AddTodo 
+            onAddClick={text =>
+                store.dispatch({
+                    type: 'ADD_TODO',
+                    text: text,
+                    id: nextTodoId++
+                })
+            } 
+        />
+        <TodoList 
+            todoList={todoList} 
+            onTodoClick={id => 
+                store.dispatch({
+                    type: 'TOGGLE_TODO',
+                    id: id
+                })
+            }
+        />
+    </div>
+)
 
 const render = () => {
     ReactDOM.render(

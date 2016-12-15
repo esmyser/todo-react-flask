@@ -2,36 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions/todos.js';
 
-let AddTodo = ({ dispatch }) => {
-    let input;
+let nextTodoId = 0;
 
-    return (
-        <div>
-            <form 
-                onSubmit={e => {
-                    e.preventDefault()
-                    if (!input.value.trim()) { 
-                        return 
-                    }
-                    dispatch(addTodo(input.value))
-                    input.value = ''
-                }}  
-            >   
-                    <input 
-                        ref={node => {
-                            input = node
-                        }}
-                        type='text' 
-                        placeholder='What needs to be done?' 
-                    />
-                    <button
-                        type='submit'>
-                        Add Todo
-                    </button>
-            </form>
-        </div>
-    )
-}
+let AddTodo = ({ todoList }) => (
+    <div>
+        <input ref={node => { todoList.input = node; }} />
+        <button onClick={() => {
+            if (!todoList.input.value.length){
+                return;
+            }
+            store.dispatch({
+                type: 'ADD_TODO',
+                text: todoList.input.value,
+                id: nextTodoId++
+            });
+            todoList.input.value = '';
+        }}>Add Todo</button>
+    </div>
+)
 
 AddTodo = connect()(AddTodo);
 

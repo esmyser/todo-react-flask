@@ -1,3 +1,5 @@
+import todo from './todo'
+
 const todoList = (state=[], action) => {
     switch (action.type) {
         case 'ADD_TODO':
@@ -9,4 +11,4 @@ const todoList = (state=[], action) => {
     }
 };
 
-export default todos;
+export default todoList;
