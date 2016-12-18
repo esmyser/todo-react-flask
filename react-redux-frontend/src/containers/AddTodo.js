@@ -8,10 +8,8 @@ let AddTodo = ({ onAddClick }) => {
             <input 
                 className="col-xs-6"
                 placeholder="What do you need to do today?"
-                ref={node => { 
-                    input = node; 
-                }
-            } />
+                ref={ node => { input = node; } } 
+            />
             <button 
                 onClick={() => {
                     if (!input.value.length){

@@ -1,7 +1,4 @@
 const todo = (state, action) => {
-    console.log('in todo');
-    console.log(state);
-    console.log(action);
     switch (action.type) { 
         case 'ADD_TODO':
             return {
