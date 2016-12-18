@@ -14,7 +14,7 @@ let TodoApp = ({ dispatch, todoList }) => (
         />
         <TodoList 
             className="btn btn-default"
-            todoList={todoList} 
+            todoList={ todoList } 
             onTodoClick={ id => dispatch(toggleTodo(id)) }
         />
     </div>

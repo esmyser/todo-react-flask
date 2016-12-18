@@ -11,7 +11,7 @@ let AddTodo = ({ onAddClick }) => {
                 ref={ node => { input = node; } } 
             />
             <button 
-                onClick={() => {
+                onClick={ () => {
                     if (!input.value.length){
                         return;
                     }
