@@ -13,7 +13,7 @@
 #     def __repr__(self):
 #         return '<{}>'.format(self.description)
 
-class Item():
+class Todo():
     def __init__(id, self, description, order):
         self.id = id
         self.description = description

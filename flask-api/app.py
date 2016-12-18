@@ -1,4 +1,5 @@
-from flask import Flask, request, redirect, url_for, render_template
+from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 # from flask_sqlalchemy import SQLAlchemy
 
 # import os
@@ -10,48 +11,52 @@ app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # db = SQLAlchemy(app)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
-# from models import Item
+# from models import Todo
 
-items = []
+todos = []
 
 @app.route('/todos', methods=['GET', 'POST'])
+@cross_origin()
 def index():
     if request.method == 'POST':
-        # item = Item(request.form['text'])
-        # db.session.add(item)
+        # todo = todo(request.form['text'])
+        # db.session.add(todo)
         # db.session.commit()
-        print("adding the item: ")
-        item = {
+        print('adding the todo: ')
+        todo = {
             id: uuid.uuid4(),
             text: request.form['text'],
             completed: False,
-            order: len(items) + 1
+            order: len(todos) + 1
         }
-        items.append(item)
-        print(item)
-        return jsonify(item)
+        todos.append(todo)
+        print(todo)
+        return todo
     else:
-        # items = Item.query.all()
-        print("getting all items: ")
-        print(items)
+        # todos = todo.query.all()
+        print('getting all todos: ')
+        print(todos)
+        return jsonify({'todos': todos})
 
-# @app.route('/todos/<int:item_id>')
-# def show_item():
+# @app.route('/todos/<int:todo_id>')
+# def show_todo():
 #     return "placeholder"
 
-# @app.route('/todos/<int:item_id>/edit', methods=['PUT'])
-# def edit_item():
+# @app.route('/todos/<int:todo_id>/edit', methods=['PUT'])
+# def edit_todo():
 #     return "placeholder"
 
-# @app.route('/todos/<int:item_id>/toggle', methods=['PUT'])
-# def finish_item():
+# @app.route('/todos/<int:todo_id>/toggle', methods=['PUT'])
+# def finish_todo():
 #     return "placeholder"
 
-# @app.route('/todos/<int:item_id>/delete', methods=['DELETE'])
-# def delete_item():
+# @app.route('/todos/<int:todo_id>/delete', methods=['DELETE'])
+# def delete_todo():
 #     return "placeholder"
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
     

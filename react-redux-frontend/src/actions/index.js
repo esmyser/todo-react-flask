@@ -11,7 +11,7 @@ export function requestTodos(todos) {
 export function receiveTodos(json) { 
     return {
         type: 'RECEIVE_TODOS',
-        todos: json.data.children.map(child => child.data),
+        todos: json.data.todos.map(child => child.data),
         receivedAt: Date.now()
     };
 }
@@ -27,7 +27,7 @@ export function fetchTodos(todos=[]) {
     console.log("fetching todos from /actions: fetchTodos");
     return function(dispatch) {
         dispatch(requestTodos(todos));
-        return fetch('http://todo-react-flask.herokuapp.com/todos')
+        return fetch('http://127.0.0.1:5000/todos')
             .then(response => 
                 response.json()
             ).then(json => 
@@ -52,7 +52,7 @@ export function postTodo(text) {
     console.log("posting todo from /actions: postTodo");
     return function(dispatch) {
         dispatch(addTodo(text));
-        return rp.post('http://todo-react-flask.herokuapp.com/todos').form({ text: text })
+        return rp.post('http://127.0.0.1:5000/todos').form({ text: text })
             .then(response => 
                 response.json()
             ).then(json => 
