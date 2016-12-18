@@ -4,8 +4,10 @@ import thunk from 'redux-thunk';
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import TodoApp from './containers/TodoApp.js';
+import { fetchTodos } from './actions/index';
+import TodoApp from './containers/TodoApp';
 import todoList from './reducers/todoList';
+
 
 const middleware = [thunk];
 
@@ -26,3 +28,7 @@ const render = () => (
 store.subscribe(render);
 
 render();
+
+store.dispatch(fetchTodos([])).then(() =>
+  console.log(store.getState())
+)
