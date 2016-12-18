@@ -23,7 +23,7 @@ export function receiveTodos(json) {
 //     };
 // }
 
-export function fetchTodos(todos) { 
+export function fetchTodos(todos=[]) { 
     console.log("fetching todos from /actions: fetchTodos");
     return function(dispatch) {
         dispatch(requestTodos(todos));
@@ -70,3 +70,5 @@ export const toggleTodo = (id) => {
         id: id
     };
 };
+
+// TODO: export function putTodo(id) { ... }

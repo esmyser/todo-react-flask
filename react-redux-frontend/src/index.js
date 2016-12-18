@@ -29,6 +29,6 @@ store.subscribe(render);
 
 render();
 
-store.dispatch(fetchTodos([])).then(() =>
+store.dispatch(fetchTodos()).then(() =>
   console.log(store.getState())
 )

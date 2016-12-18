@@ -1,42 +1,44 @@
 from flask import Flask, request, redirect, url_for, render_template
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 
-import os
+# import os
 import psycopg2
 import urllib.parse
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# db = SQLAlchemy(app)
 
-from models import Item
+# from models import Item
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/todos', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        item = Item(request.form['description'], request.form['order'])
+        item = Item(request.form['description'])
         db.session.add(item)
         db.session.commit()
-        return redirect(url_for('index'))
+        print("adding the item: ")
+        print(item)
+        return jsonify(item)
     else:
         items = Item.query.all()
+        print("getting all items: ")
         print(items)
-        return render_template('index.html', items=items)
 
-# @app.route('/<int:item_id>')
+# @app.route('/todos/<int:item_id>')
 # def show_item():
 #     return "placeholder"
 
-# @app.route('/<int:item_id>/edit', methods=['PUT'])
+# @app.route('/todos/<int:item_id>/edit', methods=['PUT'])
 # def edit_item():
 #     return "placeholder"
 
-# @app.route('/<int:item_id>/finish', methods=['PUT'])
+# @app.route('/todos/<int:item_id>/toggle', methods=['PUT'])
 # def finish_item():
 #     return "placeholder"
 
-# @app.route('/<int:item_id>/delete', methods=['DELETE'])
+# @app.route('/todos/<int:item_id>/delete', methods=['DELETE'])
 # def delete_item():
 #     return "placeholder"
 
