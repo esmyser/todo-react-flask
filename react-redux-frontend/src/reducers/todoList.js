@@ -13,6 +13,7 @@ const todoList = (state=initialState, action) => {
                 isFetching: true
             });
         case 'RECEIVE_TODOS':
+            console.log("in RECEIVE_TODOS action: ", action);
             return Object.assign({}, state, {
                 todos: action.todos,
                 isFetching: false,

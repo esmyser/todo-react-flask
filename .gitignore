@@ -3,7 +3,7 @@
 env.sh
 flask-api/env
 flask-api/venv
-flask-api/__pycache__
+flask-api/__pycache__/*
 flask-api/static/bower_components
 react-redux-frontend/npm-debug.log
 react-redux-frontend/node_modules

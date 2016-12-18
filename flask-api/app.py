@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, Response, request, jsonify
 from flask_cors import CORS, cross_origin
 # from flask_sqlalchemy import SQLAlchemy
 
@@ -16,7 +16,12 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 # from models import Todo
 
-todos = []
+todos = [{
+    'id': uuid.uuid4(),
+    'text': 'testing 123 can you see me?',
+    'completed': False,
+    'order': 0
+}]
 
 @app.route('/todos', methods=['GET', 'POST'])
 @cross_origin()
@@ -27,19 +32,20 @@ def index():
         # db.session.commit()
         print('adding the todo: ')
         todo = {
-            id: uuid.uuid4(),
-            text: request.form['text'],
-            completed: False,
-            order: len(todos) + 1
+            'id': uuid.uuid4(),
+            'text': request.form['text'],
+            'completed': False,
+            'order': len(todos)
         }
-        todos.append(todo)
         print(todo)
-        return todo
+        todos.append(todo)
+        print(todos)
+        return jsonify(**todo)
     else:
         # todos = todo.query.all()
         print('getting all todos: ')
         print(todos)
-        return jsonify({'todos': todos})
+        return jsonify({ 'todos': todos })
 
 # @app.route('/todos/<int:todo_id>')
 # def show_todo():

@@ -9,9 +9,10 @@ export function requestTodos(todos) {
 }
 
 export function receiveTodos(json) { 
+    console.log(json);
     return {
         type: 'RECEIVE_TODOS',
-        todos: json.data.todos.map(child => child.data),
+        todos: json.todos.map(child => child),
         receivedAt: Date.now()
     };
 }
@@ -44,19 +45,17 @@ export const addTodo = (todo) => {
     type: 'ADD_TODO',
     text: todo.text,
     id: todo.id,
-    completed: todo.completed
+    completed: todo.completed,
+    order: todo.order
   };
 };
 
 export function postTodo(text) {
     console.log("posting todo from /actions: postTodo");
     return function(dispatch) {
-        dispatch(addTodo(text));
         return rp.post('http://127.0.0.1:5000/todos').form({ text: text })
             .then(response => 
-                response.json()
-            ).then(json => 
-                dispatch(addTodo(json))
+                dispatch(addTodo(JSON.parse(response)))
             );
             // .catch(error =>
             //     dispatch(receiveError(error))

@@ -27,8 +27,8 @@ const render = () => (
 
 store.subscribe(render);
 
-render();
-
 store.dispatch(fetchTodos()).then(() =>
   console.log(store.getState())
 )
+
+render();
