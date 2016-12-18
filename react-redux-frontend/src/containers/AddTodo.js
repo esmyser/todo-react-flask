@@ -1,25 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from '../actions/todos.js';
 
-let nextTodoId = 0;
+let AddTodo = ({ onAddClick }) => {
+    let input;
 
-let AddTodo = ({ todoList }) => (
-    <div>
-        <input ref={node => { todoList.input = node; }} />
-        <button onClick={() => {
-            if (!todoList.input.value.length){
-                return;
-            }
-            store.dispatch({
-                type: 'ADD_TODO',
-                text: todoList.input.value,
-                id: nextTodoId++
-            });
-            todoList.input.value = '';
-        }}>Add Todo</button>
-    </div>
-)
+    return (
+        <div className="col-xs-12">
+            <input 
+                className="col-xs-6"
+                placeholder="What do you need to do today?"
+                ref={node => { 
+                    input = node; 
+                }
+            } />
+            <button 
+                onClick={() => {
+                    if (!input.value.length){
+                        return;
+                    }
+                    onAddClick(input.value);
+                    input.value = '';
+                }
+            }>Add Todo</button>
+        </div>
+    );
+};
 
 AddTodo = connect()(AddTodo);
 

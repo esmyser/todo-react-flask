@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Todo from './Todo';
+import { connect } from 'react-redux';
 
-const TodoList = ({ todoList, onTodoClick }) => (
+let TodoList = ({ todoList, onTodoClick }) => (
     <ul>
     {todoList.map(todo => 
         <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} />
@@ -9,14 +10,6 @@ const TodoList = ({ todoList, onTodoClick }) => (
     </ul>
 )
 
-TodoList.propTypes = {
-    todoList: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            text: PropTypes.string.isRequired,
-            onClick: PropTypes.func.isRequired
-        }).isRequired
-    ).isRequired
-}
+TodoList = connect()(TodoList);
 
 export default TodoList;

@@ -1,4 +1,4 @@
-import todo from './todo'
+import todo from './todo';
 
 const todoList = (state=[], action) => {
     switch (action.type) {
