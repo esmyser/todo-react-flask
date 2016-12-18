@@ -1,8 +1,5 @@
 import todo from './todo';
 
-// updating the state from just an array of items
-// to a json object like so: { items: [], isFetching: false, lastUpdated: null }
-// 
 const initialState = { 
     todos: [], 
     isFetching: false, 
@@ -23,11 +20,14 @@ const todoList = (state=initialState, action) => {
             });
         case 'ADD_TODO':
             return Object.assign({}, state, {
-                todos: [...state, todo(undefined, action)],
+                todos: [ ...state.todos, todo(undefined, action) ],
                 isFetching: false
             });
         case 'TOGGLE_TODO':
-            return state.map(t => todo(t, action));
+            return Object.assign({}, state, {
+                todos: state.todos.map(t => todo(t, action)),
+                isFetching: false
+            });
         default:
             return state;
     }
