@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 let AddTodo = ({ onAddClick }) => {
     let input;
@@ -25,7 +24,5 @@ let AddTodo = ({ onAddClick }) => {
         </div>
     );
 };
-
-AddTodo = connect()(AddTodo);
 
 export default AddTodo;

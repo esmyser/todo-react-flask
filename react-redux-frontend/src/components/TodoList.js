@@ -1,6 +1,5 @@
 import React from 'react';
 import Todo from './Todo';
-import { connect } from 'react-redux';
 
 let TodoList = ({ todoList, onTodoClick }) => (
     <ul>
@@ -9,7 +8,5 @@ let TodoList = ({ todoList, onTodoClick }) => (
     )}
     </ul>
 )
-
-TodoList = connect()(TodoList);
 
 export default TodoList;

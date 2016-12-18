@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 let Todo = ({ onClick, completed, text }) => (
     <li 
@@ -8,7 +7,5 @@ let Todo = ({ onClick, completed, text }) => (
         {text} 
     </li>
 )
-
-Todo = connect()(Todo);
 
 export default Todo;
