@@ -13,7 +13,8 @@ app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 
-# Database
+# # Database
+# # would have to split this into two git repos to get it to work with heroku (Procfile, requirements.txt, runtime.txt need to be in root folder)
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -49,7 +50,7 @@ def index():
         print(todos)
         return jsonify(**todo)
     else:
-        todos = Todo.query.all()
+        # todos = Todo.query.all()
         print('getting all todos: ')
         print(todos)
         return jsonify({ 'todos': todos })
