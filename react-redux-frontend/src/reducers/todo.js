@@ -4,11 +4,12 @@ const todo = (state, action) => {
             return {
                 id: action.id,
                 text: action.text,
-                completed: action.completed,
-                order: action.order
+                completed: action.completed
             };
         case 'TOGGLE_TODO':
             if (state.id !== action.id) {
+                console.log("the state: ", state);
+                console.log("the action: ", action);
                 return state;
             }
             return { ...state, completed: !state.completed };

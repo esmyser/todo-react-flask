@@ -17,13 +17,6 @@ export function receiveTodos(json) {
     };
 }
 
-// export function receiveError(error) {
-//     return {
-//         type: 'RECEIVE_ERROR',
-//         error: error
-//     };
-// }
-
 export function fetchTodos(todos=[]) { 
     console.log("fetching todos from /actions: fetchTodos");
     return function(dispatch) {
@@ -34,9 +27,6 @@ export function fetchTodos(todos=[]) {
             ).then(json => 
                 dispatch(receiveTodos(json))
             );
-            // .catch(error =>
-            //     dispatch(receiveError(error))
-            // )
     };
 }
 
@@ -45,8 +35,7 @@ export const addTodo = (todo) => {
     type: 'ADD_TODO',
     text: todo.text,
     id: todo.id,
-    completed: todo.completed,
-    order: todo.order
+    completed: todo.completed
   };
 };
 
@@ -57,17 +46,31 @@ export function postTodo(text) {
             .then(response => 
                 dispatch(addTodo(JSON.parse(response)))
             );
-            // .catch(error =>
-            //     dispatch(receiveError(error))
-            // )
     };
 }
 
-export const toggleTodo = (id) => {
+export const toggleTodoAction = (id) => {
     return {
         type: 'TOGGLE_TODO',
         id: id
     };
 };
 
-// TODO: export function putTodo(id) { ... }
+export function toggleTodo(id) {
+    return function(dispatch) { 
+        let url = 'http://127.0.0.1:5000/todos/' + id + '/toggle';
+        return rp.put(url)
+            .then(response => 
+                dispatch(toggleTodoAction(id))
+            );
+    };
+}
+
+// export function putTodo(id) { ... }
+
+// export function receiveError(error) {
+//     return {
+//         type: 'RECEIVE_ERROR',
+//         error: error
+//     };
+// }
