@@ -1,20 +1,24 @@
 from flask import Flask, Response, request, jsonify
 from flask_cors import CORS, cross_origin
-# from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
-# import os
+import os
 import psycopg2
 import urllib.parse
 import uuid
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# db = SQLAlchemy(app)
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
-# from models import Todo
+# CORS
+app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app)
+
+# Database
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+from models import Todo
 
 todos = [{
     'id': uuid.uuid4(),
