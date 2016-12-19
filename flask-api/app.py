@@ -21,55 +21,52 @@ CORS(app)
 # db = SQLAlchemy(app)
 # from models import Todo
 
+# order is place in the array
+# to change order, find the todo, slice it out, slice it back in at desired index
 todos = [{
     'id': uuid.uuid4(),
     'text': 'testing 123 can you see me?',
     'completed': False,
-    'order': 0
 }]
 
 @app.route('/todos', methods=['GET', 'POST'])
 @cross_origin()
 def index():
     if request.method == 'POST':
-        # order = len(Todo.query.all())
-        # print(order)
-        # todo = Todo(order, request.form['text'])
-        # print(todo)
-        # db.session.add(todo)
-        # db.session.commit()
-        print('adding the todo: ')
         todo = {
-            'id': uuid.uuid4(),
+            'id': len(todos) + 1,
             'text': request.form['text'],
             'completed': False,
-            'order': len(todos)
         }
-        print(todo)
         todos.append(todo)
-        print(todos)
         return jsonify(**todo)
     else:
-        # todos = Todo.query.all()
-        print('getting all todos: ')
-        print(todos)
         return jsonify({ 'todos': todos })
 
-# @app.route('/todos/<int:todo_id>')
-# def show_todo():
-#     return "placeholder"
+@app.route('/todos/<index>')
+def show_todo(index):
+    if len(todos) > int(index):
+        return jsonify(todos[int(index)])
+    else:
+        return "not found", 404
 
-# @app.route('/todos/<int:todo_id>/edit', methods=['PUT'])
-# def edit_todo():
-#     return "placeholder"
+@app.route('/todos/<index>/toggle', methods=['PUT'])
+def toggle_todo(index):
+    index = int(index)
+    todos[index]['completed'] = not todos[index]['completed']
+    return jsonify(todos[index])
 
-# @app.route('/todos/<int:todo_id>/toggle', methods=['PUT'])
-# def finish_todo():
-#     return "placeholder"
+@app.route('/todos/<index>/edit', methods=['PUT'])
+def edit_todo(index):
+    return "placeholder"
 
-# @app.route('/todos/<int:todo_id>/delete', methods=['DELETE'])
-# def delete_todo():
-#     return "placeholder"
+@app.route('/todos/<index>/delete', methods=['DELETE'])
+def delete_todo(index):
+    return "placeholder"
+
+@app.route('/todos/<index>/<int:order>', methods=['POST'])
+def order_todo(index):
+    return "placeholder"
 
 if __name__ == '__main__':
     app.run(debug=True)
